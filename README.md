@@ -53,3 +53,7 @@ fn format_response(status_line: &str, contents: &str) -> String {
 Pada saat ini, pembuatan respons dilakukan di dalam struktur percabangan if dan else. Kedua bagian kode hampir identik, dengan perbedaan pada baris status, isi, dan panjang. Adalah mungkin untuk membuat sebuah fungsi terpisah yang menerima parameter-parameter ini dan menghasilkan respons yang diformat secara sesuai. Dengan melakukan refaktorisasi seperti ini, kita dapat meningkatkan keterbacaan dan kemudahan pemeliharaan kode. Dengan memisahkan logika pembuatan respons ke dalam fungsi terpisah, kita dapat menghindari duplikasi kode dan membuatnya lebih mudah untuk dikelola di masa mendatang.
 
 ![Commit 3 screen capture](/assets/images/commit3.png)
+
+## Commit 4 Reflection
+
+Jika mencoba membuka dua jendela browser dan mengakses 127.0.0.1/sleep di salah satunya dan 127.0.0.1/ di tab lainnya, akan terjadi penundaan dalam pemuatan halaman. Penundaan ini disebabkan oleh server tunggal yang mengelola semua permintaan secara berurutan, bukan secara bersamaan. Ketika server sedang menangani permintaan /sleep dan melakukan penundaan selama lima detik, permintaan lainnya harus menunggu hingga server menyelesaikan penanganan permintaan tersebut.
