@@ -24,3 +24,32 @@ Browser menandai akhir dari permintaan HTTP dengan mengirim dua karakter baris b
 ### Commit 2 Reflection
 
 ![Commit 2 screen capture](/assets/images/commit2.png)
+
+## Commit 3 Reflection
+
+```rust
+fn handle_connection(mut stream: TcpStream) { 
+    let buf_reader = BufReader::new(&mut stream);
+    let request_line = buf_reader.lines().next().unwrap().unwrap();
+    let (status_line, filename) = if request_line == "GET / HTTP/1.1" {
+        ("HTTP/1.1 200 OK", "hello.html")
+    } else {
+        ("HTTP/1.1 404 NOT FOUND", "404.html")
+    };
+
+    let contents = fs::read_to_string(filename).unwrap();
+    let response = format_response(status_line, &contents);
+
+    stream.write_all(response.as_bytes()).unwrap();
+}
+
+fn format_response(status_line: &str, contents: &str) -> String {
+    let length = contents.len();
+    format!(
+        "{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}"
+    )
+}
+```
+Pada saat ini, pembuatan respons dilakukan di dalam struktur percabangan if dan else. Kedua bagian kode hampir identik, dengan perbedaan pada baris status, isi, dan panjang. Adalah mungkin untuk membuat sebuah fungsi terpisah yang menerima parameter-parameter ini dan menghasilkan respons yang diformat secara sesuai. Dengan melakukan refaktorisasi seperti ini, kita dapat meningkatkan keterbacaan dan kemudahan pemeliharaan kode. Dengan memisahkan logika pembuatan respons ke dalam fungsi terpisah, kita dapat menghindari duplikasi kode dan membuatnya lebih mudah untuk dikelola di masa mendatang.
+
+![Commit 3 screen capture](/assets/images/commit3.png)
