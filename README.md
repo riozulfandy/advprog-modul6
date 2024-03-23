@@ -57,3 +57,6 @@ Pada saat ini, pembuatan respons dilakukan di dalam struktur percabangan if dan 
 ## Commit 4 Reflection
 
 Jika mencoba membuka dua jendela browser dan mengakses 127.0.0.1/sleep di salah satunya dan 127.0.0.1/ di tab lainnya, akan terjadi penundaan dalam pemuatan halaman. Penundaan ini disebabkan oleh server tunggal yang mengelola semua permintaan secara berurutan, bukan secara bersamaan. Ketika server sedang menangani permintaan /sleep dan melakukan penundaan selama lima detik, permintaan lainnya harus menunggu hingga server menyelesaikan penanganan permintaan tersebut.
+
+## Commit 5 Reflection
+Thread pool adalah sekelompok thread yang telah disiapkan untuk menangani berbagai tugas. Ketika program menerima tugas baru, ia menugaskan salah satu thread dari dalam pool untuk menanganinya. Sementara itu, thread lain dalam pool tetap tersedia untuk menangani tugas-tugas baru yang mungkin masuk saat thread pertama sedang sibuk. Setelah thread pertama menyelesaikan tugasnya, ia akan dikembalikan ke dalam pool thread yang tersedia, siap untuk menangani tugas-tugas berikutnya. Penggunaan thread pool memungkinkan untuk melakukan pemrosesan koneksi secara bersamaan, sehingga meningkatkan throughput dari server Anda.
